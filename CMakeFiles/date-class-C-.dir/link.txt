@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/date-class-C-.dir/main.cpp.o CMakeFiles/date-class-C-.dir/date.cpp.o  -o date-class-C- 
