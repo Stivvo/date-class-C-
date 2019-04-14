@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/stefano/date-class-C-/date.hpp
+iostream
+-
+time.h
+-
+
+/home/stefano/date-class-C-/main.cpp
+date.hpp
+/home/stefano/date-class-C-/date.hpp
+
