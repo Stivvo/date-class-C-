@@ -171,6 +171,18 @@ date& date::operator -- (int x)
 
 void date::setCurrent()
 {
+	system_clock::time_point now = system_clock::now();
+    time_t tt = system_clock::to_time_t(now);
+    tm *todayTm = localtime(&tt);
+
+	this->setAll(
+               todayTm->tm_mday,
+               todayTm->tm_mon + 1,
+               todayTm->tm_year + YR);
+}
+
+void date::setCurrentTm()
+{
 	time_t a = time(0);
     struct tm *todayTm = localtime(&a);
 

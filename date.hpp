@@ -3,8 +3,10 @@
 
 #include <iostream>
 #include <time.h>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 #define YR 1900
 #define FORMAT 1  //FORMAT == 0;  m/d/y; FORMAT != 0; d/m/y
@@ -34,6 +36,7 @@ public:
 	bool bisestile();
     int getMaxD(); //returns the number of days of  the  caller instance's month
 	void setCurrent();//set the caller instance to the current date
+	void setCurrentTm(); //the caller instance to the current date using time(0)
 
 	string getMonthName(); //returns a string that contains the name of month of the parameter m
 
