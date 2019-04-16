@@ -2,10 +2,6 @@
 
 //this file has only been made to test the date class and show how to use it
 //if you want to run this test, run cmake in this folder
-//to use this class, copy date.hpp and date.cpp in your project's folder and include date.hpp
-
-//time.h library is required
-//developed on linux
 
 using namespace std;
 
