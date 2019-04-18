@@ -3,17 +3,11 @@
 int date::maxD[] =
 {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-date::date()
-{
-    d = 1;
-    m = 1;
-    y = YR;
-}
-
-date::date(int d, int m, int y)
-{
-    (*this).setAll(d, m, y);
-}
+date::date(int dd, int mm, int yy) :
+    d{dd},
+    m{mm},
+    y{yy}
+{}
 
 bool date::setAll(int d, int m, int y)
 {
@@ -23,9 +17,9 @@ bool date::setAll(int d, int m, int y)
 
     if (!this->valid())
 	{
-		this->d = 1;
-		this->m = 1;
-		this->y = YR;
+        this->d = 1;
+        this->m = 1;
+        this->y = YR;
 		return false;
 	}
 	return true;
@@ -50,11 +44,11 @@ bool date::valid()
 
 bool date::bisestile()
 {
-	if (y % 400 == 0)
+    if (y % 400 == 0)
 		return true;
 	else
 	{
-		if ((y % 4 == 0) && (y % 100 != 0))
+        if ((y % 4 == 0) && (y % 100 != 0))
 			return true;
 	}
 	return false;
@@ -76,15 +70,15 @@ int date::getMaxD()
 
 bool date::operator > (const date &x)
 {
-	if ((*this).y > x.y)
+    if ((*this).y > x.y)
 	{
         return true;
 	}
-	else if ((*this).y == x.y)
+    else if ((*this).y == x.y)
 	{
-		if ((*this).m > x.m)
+        if ((*this).m > x.m)
 			return true;
-		else if ((*this).m == x.m)
+        else if ((*this).m == x.m)
 		{
             if ((*this).d > x.d)
 				return true;
@@ -133,12 +127,6 @@ bool date::operator != (const date &x)
     return false;
 }
 
-date &date::operator = (const date &x)
-{
-	(*this).setAll(x.d, x.m, x.y);
-	return *this;
-}
-
 date& date::operator ++ (int x)
 {
     if (m ==12 && d == 31)
@@ -149,7 +137,7 @@ date& date::operator ++ (int x)
     if (d > this->getMaxD())
 	{
         d = 1;
-		m++;
+        m++;
 	}
 	return (*this);
 }
@@ -164,15 +152,15 @@ date& date::operator -- (int x)
     if (d <= 0)
 	{
         d = this->getMaxD();
-		m--;
+        m--;
 	}
 	return (*this);
 }
 
 void date::setCurrent()
 {
-	system_clock::time_point now = system_clock::now();
-    time_t tt = system_clock::to_time_t(now);
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    time_t tt = std::chrono::system_clock::to_time_t(now);
     tm *todayTm = localtime(&tt);
 
 	this->setAll(
@@ -187,12 +175,12 @@ void date::setCurrentTm()
     struct tm *todayTm = localtime(&a);
 
     this->setAll(
-               todayTm->tm_mday,
-               todayTm->tm_mon + 1,
-               todayTm->tm_year + YR);
+                todayTm->tm_mday,
+               	todayTm->tm_mon + 1,
+               	todayTm->tm_year + YR);
 }
 
-ostream& operator << (ostream &io, const date &x)
+std::ostream& operator << (std::ostream &io, const date &x)
 {
     if (FORMAT == 0)
         io<<x.m<<"/"<<x.d<<"/"<<x.y;
@@ -202,7 +190,7 @@ ostream& operator << (ostream &io, const date &x)
 	return io;
 }
 
-istream& operator >> (istream &io, date &x)
+std::istream& operator >> (std::istream &io, date &x)
 {
 	bool first = true;
 
@@ -211,15 +199,15 @@ istream& operator >> (istream &io, date &x)
         if (first)
             first = false;
         else
-            cout<<endl<<"unvalid date, please retry!";
+            std::cout<<std::endl<<"unvalid date, please retry!";
 
-        cout<<endl<<"Year: ";
+        std::cout<<std::endl<<"y: ";
         io>>x.y;
 
-        cout<<"Month: ";
+        std::cout<<"m: ";
         io>>x.m;
 
-        cout<<"Day: ";
+        std::cout<<"d: ";
         io>>x.d;
     }
     while (!x.valid());
@@ -227,7 +215,7 @@ istream& operator >> (istream &io, date &x)
 	return io;
 }
 
-string date::getMonthName()
+std::string date::getMonthName()
 {
     switch(this->m)
     {
