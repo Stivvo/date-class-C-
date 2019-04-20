@@ -50,8 +50,8 @@ public:
     bool operator != (const date &x);
 
 
-    date &operator ++ (int x); //increase the caller instance of 1 d
-    date &operator -- (int x); //decrease the caller instance of 1 d
+    date &operator ++ (); //increase the caller instance of 1 d
+    date &operator -- (); //decrease the caller instance of 1 d
 
     friend std::ostream& operator << (std::ostream &io, const date &x);
     friend std::istream& operator >> (std::istream &io, date &x);

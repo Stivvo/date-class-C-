@@ -127,11 +127,8 @@ bool date::operator != (const date &x)
     return false;
 }
 
-date& date::operator ++ (int x)
+date& date::operator ++ ()
 {
-    if (m ==12 && d == 31)
-        y++;
-
     d++;
 
     if (d > this->getMaxD())
@@ -139,21 +136,33 @@ date& date::operator ++ (int x)
         d = 1;
         m++;
 	}
+
+    if (m > 12)
+    {
+        y++;
+        m = 1;
+    }
+
 	return (*this);
 }
 
-date& date::operator -- (int x)
+date& date::operator -- ()
 {
-    if (m == 1 && d == 1)
-        y--;
-
     d--;
 
-    if (d <= 0)
+    if (d < 1)
 	{
-        d = this->getMaxD();
         m--;
+        d = this->getMaxD();
 	}
+
+    if (m < 1)
+    {
+        y--;
+        m = 12;
+        d = 31;
+    }
+
 	return (*this);
 }
 
